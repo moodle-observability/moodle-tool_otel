@@ -1,3 +1,5 @@
+<img src="docs/logo/logo.svg" alt="moodle-tool_otel logo" width="96" align="right" />
+
 # moodle-tool_otel
 
 [![Documentation](https://github.com/moodle-observability/moodle-tool_otel/actions/workflows/docs.yml/badge.svg)](https://github.com/moodle-observability/moodle-tool_otel/actions/workflows/docs.yml)

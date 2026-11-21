@@ -1,0 +1,15 @@
+{
+  "name": "moodle-observability/tool_otel-vendor",
+  "require": {
+    "php": ">=8.3",
+    "open-telemetry/sdk": "^1.0",
+    "open-telemetry/exporter-otlp": "^1.0"
+  },
+  "replace": {
+    "psr/log": "*", "psr/http-client": "*", "psr/http-message": "*", "psr/http-factory": "*",
+    "psr/container": "*", "psr/clock": "*", "psr/event-dispatcher": "*",
+    "guzzlehttp/guzzle": "*", "guzzlehttp/psr7": "*", "guzzlehttp/promises": "*",
+    "symfony/http-client": "*", "symfony/http-client-contracts": "*", "symfony/polyfill-mbstring": "*"
+  },
+  "config": {"platform": {"php": "8.3.0"}, "allow-plugins": {"php-http/discovery": false, "tbachert/spi": false}, "optimize-autoloader": true}
+}

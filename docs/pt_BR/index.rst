@@ -7,11 +7,11 @@ Adiciona tracing distribuído ao Moodle com OpenTelemetry e exporta os traces vi
 
 .. note::
 
-   Fase de pesquisa: um spike vai avaliar o SDK PHP do OpenTelemetry com o bootstrap do Moodle antes de planejar o MVP. Ainda não há versão publicada.
+   Versão 0.1.0 (alfa). O spike que avaliou o SDK PHP do OpenTelemetry com o bootstrap do Moodle está em :doc:`spike`.
    Acompanhe o andamento nas `issues <https://github.com/moodle-observability/moodle-tool_otel/issues>`_.
 
-Funcionalidades previstas
--------------------------
+Funcionalidades
+---------------
 
 A coluna ``tool_sentry`` indica se o plugin `moodle-tool_sentry <https://github.com/moodle-observability/moodle-tool_sentry>`_ também oferece a funcionalidade. Veja o comparativo completo em :doc:`otel-vs-sentry`.
 
@@ -22,17 +22,17 @@ A coluna ``tool_sentry`` indica se o plugin `moodle-tool_sentry <https://github.
    * - Funcionalidade
      - tool_otel
      - tool_sentry
-   * - Span raiz por requisição HTTP com rota e contexto do usuário, sem dados pessoais.
+   * - Span raiz por requisição HTTP com rota e contexto do usuário, sem dados pessoais; continua um ``traceparent`` W3C recebido.
      - ✅
      - ❌ Só ativa o tracing do SDK; não cria spans do Moodle.
-   * - Spans de consultas ao banco (sem os valores dos parâmetros).
-     - ✅
+   * - Trabalho de banco de dados de cada requisição.
+     - ⚠️ Agregados no span da requisição (leituras, escritas, tempo de consulta); spans por consulta exigem um hook no core.
      - ❌
    * - Spans das chamadas HTTP de saída feitas com a classe ``curl``.
-     - ✅
+     - ❌ O Moodle não tem hook para chamadas de saída.
      - ❌
-   * - Spans de web services e tarefas agendadas.
-     - ✅
+   * - Spans de web services e de tarefas agendadas e adhoc.
+     - ✅ Tarefas com ``$CFG->task_log_class``.
      - ❌ Marca os erros das tarefas com contexto (tags), sem spans.
    * - Exportador OTLP para qualquer backend compatível.
      - ✅
@@ -40,13 +40,24 @@ A coluna ``tool_sentry`` indica se o plugin `moodle-tool_sentry <https://github.
    * - Amostragem de traces configurável.
      - ✅
      - ✅ ``traces_sample_rate``.
+   * - Inicia antes do Moodle (``auto_prepend_file``).
+     - ✅
+     - ✅
+   * - Pontos de extensão: enriquecer e redigir spans; API de tracing para outros plugins.
+     - ✅
+     - ❌
+
+Legenda: ✅ disponível; ⚠️ parcial ou só na condição indicada; ❌ não oferecido.
 
 Requisitos
 ----------
 
 * Moodle 5.3 ou posterior.
-* Versão do PHP suportada pela sua versão do Moodle.
+* Versão do PHP suportada pela sua versão do Moodle (8.3 ou posterior).
 * PostgreSQL ou MariaDB.
+* Um receptor OTLP/HTTP: OpenTelemetry Collector, Grafana Tempo, Jaeger ou Sentry.
+
+O SDK PHP do OpenTelemetry vem no plugin (``vendor/``); a extensão PHP ``opentelemetry`` não é necessária.
 
 Links
 -----
@@ -62,4 +73,6 @@ Links
    installation
    configuration
    usage
+   extending
+   spike
    otel-vs-sentry

@@ -1,22 +1,15 @@
 Instalação
 ==========
 
-.. note::
+1. Baixe ``tool_otel-<versão>.zip`` em `releases <https://github.com/moodle-observability/moodle-tool_otel/releases>`_, ou clone o repositório em ``public/admin/tool/otel``:
 
-   Ainda não há versão publicada. Estes passos instalam a versão de desenvolvimento.
+   .. code-block:: bash
 
-Com Git
--------
+      git clone https://github.com/moodle-observability/moodle-tool_otel.git public/admin/tool/otel
 
-Na pasta raiz do Moodle (``public`` no Moodle 5.1 ou posterior):
+2. Rode ``php admin/cli/upgrade.php`` (ou abra *Administração do site > Notificações*).
+3. Configure o endpoint OTLP (:doc:`configuration`).
 
-.. code-block:: bash
+O SDK e suas dependências ficam em ``vendor/``. Eles reaproveitam os pacotes Guzzle, PSR e Symfony do core do Moodle em vez de trazer cópias próprias.
 
-   git clone https://github.com/moodle-observability/moodle-tool_otel.git admin/tool/otel
-
-Depois abra *Administração do site > Notificações* para concluir a instalação, ou rode ``php admin/cli/upgrade.php``.
-
-Desinstalação
--------------
-
-*Administração do site > Plugins > Visão geral dos plugins*, localize ``tool_otel`` e clique em *Desinstalar*.
+Desinstalação: remova o ``auto_prepend_file`` e o ``$CFG->task_log_class``, se os definiu, e depois *Administração do site > Plugins > Visão geral dos plugins*, ``tool_otel``, *Desinstalar*.

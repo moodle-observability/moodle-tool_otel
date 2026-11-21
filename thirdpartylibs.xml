@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<libraries>
+    <library>
+        <location>vendor</location>
+        <name>OpenTelemetry PHP SDK and OTLP exporter (with google/protobuf, ramsey/uuid, brick/math, php-http/discovery, nyholm/psr7-server, composer/semver, tbachert/spi)</name>
+        <version>1.17.0</version>
+        <license>Apache-2.0</license>
+        <repository>https://github.com/open-telemetry/opentelemetry-php</repository>
+    </library>
+</libraries>

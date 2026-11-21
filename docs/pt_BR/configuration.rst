@@ -54,3 +54,5 @@ Cada execução de tarefa agendada e adhoc vira um span (com os horários reais 
 .. code-block:: php
 
    $CFG->task_log_class = '\tool_otel\task_logger';
+
+O Moodle chama o task logger conforme *Administração do site > Servidor > Tarefas > Configuração do log de tarefas*: com o modo de log só de falhas (``$CFG->task_logmode = 1``), apenas as execuções com falha viram spans. Registre todas as execuções para rastrear todas.

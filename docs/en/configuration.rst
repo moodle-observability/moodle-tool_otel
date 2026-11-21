@@ -54,3 +54,5 @@ Each scheduled and adhoc task run becomes a span (with its real start and end ti
 .. code-block:: php
 
    $CFG->task_log_class = '\tool_otel\task_logger';
+
+Moodle calls the task logger according to *Site administration > Server > Tasks > Task log configuration*: with *Log mode* set to failures only (``$CFG->task_logmode = 1``), only failed runs become spans. Log all task output to trace every run.

@@ -13,11 +13,33 @@ Adiciona tracing distribuído ao Moodle com OpenTelemetry e exporta os traces vi
 Funcionalidades previstas
 -------------------------
 
-* Span raiz por requisição HTTP com rota e contexto do usuário, sem dados pessoais.
-* Spans de consultas ao banco (sem os valores dos parâmetros).
-* Spans das chamadas HTTP de saída feitas com a classe ``curl``.
-* Spans de web services e tarefas agendadas.
-* Exportador OTLP e amostragem configuráveis.
+A coluna ``tool_sentry`` indica se o plugin `moodle-tool_sentry <https://github.com/moodle-observability/moodle-tool_sentry>`_ também oferece a funcionalidade. Veja o comparativo completo em :doc:`otel-vs-sentry`.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 60 12 28
+
+   * - Funcionalidade
+     - tool_otel
+     - tool_sentry
+   * - Span raiz por requisição HTTP com rota e contexto do usuário, sem dados pessoais.
+     - ✅
+     - ❌ Só ativa o tracing do SDK; não cria spans do Moodle.
+   * - Spans de consultas ao banco (sem os valores dos parâmetros).
+     - ✅
+     - ❌
+   * - Spans das chamadas HTTP de saída feitas com a classe ``curl``.
+     - ✅
+     - ❌
+   * - Spans de web services e tarefas agendadas.
+     - ✅
+     - ❌ Marca os erros das tarefas com contexto (tags), sem spans.
+   * - Exportador OTLP para qualquer backend compatível.
+     - ✅
+     - ❌ Envia apenas para o Sentry.
+   * - Amostragem de traces configurável.
+     - ✅
+     - ✅ ``traces_sample_rate``.
 
 Requisitos
 ----------
@@ -40,3 +62,4 @@ Links
    installation
    configuration
    usage
+   otel-vs-sentry

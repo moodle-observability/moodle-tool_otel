@@ -29,7 +29,7 @@ html_theme_options = {
     "doc_path": "docs/en/",
     "show_edit_on_github": True,
     "enable_dark_mode": True,
-    "navigation_links": "Home|index, Installation|installation, Configuration|configuration, Usage|usage",
+    "navigation_links": "Home|index, Installation|installation, Configuration|configuration, Usage|usage, OTel vs Sentry|otel-vs-sentry",
 }
 
 html_static_path = []
